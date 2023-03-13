@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Random Place</title>
+    <style>
+      html {
+        height: 95%
+      }
+      #animation {
+        height: 400px;
+        background-image: url("globe-spin.gif");
+        background-repeat: no-repeat;
+        background-position: center center
+      }
+      .margin {
+        margin: 5px
+      }
+      #dart {
+        width: 100px;
+        transform: rotate(-45deg);
+        position: absolute;
+        top: 35%
+      }
+      #info {
+        font-size: 12px;
+        font-style: italic;
+        position: absolute;
+        bottom: 10px
+      }
+    </style>
+    <script>
+      function travel() {
+        let latitude = Math.random() * 135 - 60;
+        let longitude = Math.random() * 360 - 180;
+        let zoom = 10; // 0.33 <= zoom <=20
+        let url = `https://www.qwant.com/maps/#map=${zoom}/${latitude}/${longitude}`;
+        let distance = innerWidth / 2 - 225
+        function animate(x) {
+          document.getElementById("dart").style.marginLeft = x + "px";
+        };
+        for (let i = 1; i <= distance; i++) {
+          setTimeout(animate, i * 0.25, i);
+        };
+        setTimeout(open, distance * 0.25, url);
+      };
+    </script>
+  </head>
+  <body>
+    <h1>Go to a random place on Earth !</h1>
+    <button class="margin" onclick="travel();">Let's go !</button>
+    <br />
+    <div id="animation" class="margin">
+      <img id="dart" src="dart.webp"></img>
+    </div>
+    <p id="info" class="margin">Powered by Qwant Maps</p>
+  </body>
+</html>
